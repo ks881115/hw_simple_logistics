@@ -7,6 +7,9 @@ import java.util.List;
 
 /**
  * Created by coupang on 2016. 1. 3..
+ *
+ *
+ *
  */
 public interface OrderManager {
     void saveOrder(OrderRecord order);

@@ -136,6 +136,7 @@ public class Main {
             }
         }
 
+        // Close opened files
         persistenceLayer.clear();
     }
 }

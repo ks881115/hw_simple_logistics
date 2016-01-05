@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by coupang on 2016. 1. 2..
  *
- * Temporary buffer stores newly received orders.
+ * Temporary buffer stores newly arrived orders.
  * Orders stored here are neither searched nor persisted.
  *
  */

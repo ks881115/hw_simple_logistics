@@ -59,6 +59,7 @@ public class FilePersistenceLayer implements PersistenceLayer {
             for(OrderRecord order : orders) {
                 writeSingleOrder(order);
             }
+            // Commit when all the orders are written
             writerProfiles.flush();
             writerProducts.flush();
         } catch (IOException e) {
@@ -70,14 +71,17 @@ public class FilePersistenceLayer implements PersistenceLayer {
     public OrderRecord findOrderByOrderId(long orderId) {
         OrderRecord orderRecord = null;
 
+        // Index를 이용하여 order profile이 적혀있는 file position 찾아낸다
         Long posOrderProfile = orderProfileIndex.get(orderId);
 
         if(posOrderProfile != null) {
             try {
+                // 찾아낸 file position으로 이동하여, csv로 저장된 order profile 찾아낸다
                 rafProfiles.seek(posOrderProfile);
                 String line = rafProfiles.readLine();
                 ProfileFileRecord fileRecord = new ProfileFileRecord(line);
 
+                // 주문에 포함된
                 long posProducts = fileRecord.getPosProducts();
                 rafProducts.seek(posProducts * SIZE_LONG);
 
